@@ -1,0 +1,32 @@
+create table Employee(
+employee_ID serial primary key,
+employee_name varchar(64) not null,
+last_name varchar(64) not null,
+middle_name varchar(64),
+birth_date date not null,
+work_phone_number varchar(20) not null,
+passport_number int not null,
+category_number int not null
+);
+
+create table WorkTable(
+work_ID serial primary key,
+company_name varchar(64) not null,
+work_date date not null,
+hours_spend int not null
+);
+
+create table CategoryTable(
+category_number serial primary key,
+money_for_hour varchar(20) not null
+);
+
+create table CheckWork(
+check_ID serial primary key,
+employee_ID int,
+work_ID int
+);
+
+alter table CheckWork add foreign key (employee_ID) references Employee(employee_ID);
+alter table CheckWork add foreign key (work_ID) references WorkTable(work_ID);
+alter table Employee add foreign key (category_number) references CategoryTable(category_number);
